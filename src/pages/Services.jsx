@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = "https://project1-backend-vn8m.onrender.com/api";
 
 const ProjectDetails = () => {
   const { id } = useParams();
