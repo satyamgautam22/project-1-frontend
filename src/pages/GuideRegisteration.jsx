@@ -54,7 +54,7 @@ const GuideRegistration = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:5000/api/guide/register",
+        "https://project1-backend-vn8m.onrender.com/api/guide/register",
         payload,
         { withCredentials: true }
       );
