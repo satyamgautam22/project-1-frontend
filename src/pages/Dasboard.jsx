@@ -9,6 +9,7 @@ import Uploadingproject from "../component/Uploadingproject.jsx";
 import Soket from "../Soket.jsx";
 import InstantMessages from "./InstantMessages.jsx";
 import GuideBooking from "./GuideBooking.jsx";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   // pick a valid default tab:
@@ -17,9 +18,13 @@ const Dashboard = () => {
   const [shareLink, setShareLink] = useState("");
 
   // 🔒 block entry if no token
-  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
   if (!token || loggedOut) {
+    
+    toast.success("Logged out successfully");
     return <Navigate to="/login" replace />;
+    
   }
 
   const logout = () => {
@@ -27,114 +32,116 @@ const Dashboard = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     setLoggedOut(true);
+    
   };
 
   const menuItems = [
-    { key: "file", label: "📂 Upload Files" },
-    { key: "addImage", label: "🖼 Upload Image" },
-    { key: "addVideo", label: "🎥 Upload Video" },
-    { key: "uploadProject", label: "📂 Upload Project" },
-    { key: "liveLocation", label: "📍 Live Location" },
-    { key: "instantMessager", label: "💬 Instant Messager" },
+   
+    { key: "uploadProject", label: "📂 Post" },
+
+   
     { key: "bookguide", label: "🧑‍✈️ Guide Booking" },
   ];
 
   // Live Location Sharing
-  const startSharing = async () => {
-    const res = await fetch("https://project1-backend-vn8m.onrender.com/api/live-location/share", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, // include token if backend protects it
-    });
-    const data = await res.json();
-    setShareLink(data.shareUrl);
-
-    const shareId = data.shareUrl.split("/").pop();
-    Soket.emit("start-sharing", { shareId });
-
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition((pos) => {
-        Soket.emit("send-location", {
-          shareId,
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude,
-        });
-      });
-    } else {
-      alert("❌ Geolocation not supported in your browser");
-    }
-  };
-
-  const stopSharing = () => {
-    if (!shareLink) return;
-    const shareId = shareLink.split("/").pop();
-    Soket.emit("stop-sharing", { shareId });
-    setShareLink("");
-  };
+  
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-[#F5F2EB] text-[#2E1B0F]">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-900 text-white flex flex-col shadow-lg">
-        <div className="p-5 text-2xl font-bold border-b border-gray-700">My Dashboard</div>
-        <nav className="flex-1 p-4 space-y-2">
+      <aside className="w-64 bg-[#2E1B0F] text-[#F5F2EB] flex flex-col shadow-xl">
+        <div className="p-5 border-b border-[#5C4330]">
+          <h1 className="text-xl font-bold tracking-wide">User Dashboard</h1>
+          
+        </div>
+
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {menuItems.map((item) => (
             <button
               key={item.key}
               onClick={() => setActiveSection(item.key)}
-              className={`w-full text-left px-4 py-3 rounded-lg transition-colors font-medium ${
-                activeSection === item.key ? "bg-blue-600" : "hover:bg-gray-700"
+              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition ${
+                activeSection === item.key
+                  ? "bg-[#C58F48] text-[#2E1B0F]"
+                  : "hover:bg-[#5C4330]"
               }`}
             >
               {item.label}
             </button>
           ))}
+
           <button
             onClick={logout}
-            className="w-full text-left px-4 py-3 rounded-lg bg-red-600 hover:bg-red-700 transition-colors font-medium"
+            className="w-full text-left px-4 py-3 rounded-lg bg-red-600 hover:bg-yellow-600 transition-colors font-medium mt-4"
           >
             Logout
           </button>
+
+          <button onClick={() => window.location.href = "/"} className="w-full text-left px-4 py-3 rounded-lg bg-red-600 hover:bg-yellow-600 transition-colors font-medium mt-4">
+            Home
+          </button>
+          
         </nav>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 bg-gray-100 overflow-auto">
-        {activeSection === "uploadProject" && <Uploadingproject />}
-        {activeSection === "addImage" && <AddImageSection />}
-        {activeSection === "addVideo" && <AddVideoSection />}
-        {activeSection === "file" && <FileUploadSection />}
-        {activeSection === "projects" && <ProjectsSection />}
-        {activeSection === "instantMessager" && <InstantMessages />}
-        {activeSection === "bookguide" && <GuideBooking />}
+      <main className="flex-1 p-6 bg-[#FDF7EC] overflow-auto">
+        <div className="max-w-6xl mx-auto space-y-4">
+          {/* Header */}
+          
 
-        {activeSection === "liveLocation" && (
-          <div>
-            <h2 className="text-xl font-bold mb-4">Live Location Sharing</h2>
+          {/* Card Wrapper – logic inside is EXACTLY same as your original */}
+          <section className="bg-white rounded-2xl shadow-sm border border-[#E2D7C5] p-4 md:p-5">
+            {activeSection === "uploadProject" && <Uploadingproject />}
+            {activeSection === "addImage" && <AddImageSection />}
+            {activeSection === "addVideo" && <AddVideoSection />}
+            {activeSection === "file" && <FileUploadSection />}
+            {activeSection === "projects" && <ProjectsSection />}
+            {activeSection === "instantMessager" && <InstantMessages />}
+            {activeSection === "bookguide" && <GuideBooking />}
 
-            {!shareLink ? (
-              <button onClick={startSharing} className="bg-blue-600 text-white px-4 py-2 rounded">
-                Start Sharing Live Location
-              </button>
-            ) : (
-              <div className="space-y-4">
-                <p>
-                  Share this link:{" "}
-                  <a
-                    href={shareLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 underline"
-                  >
-                    {shareLink}
-                  </a>
+            {activeSection === "liveLocation" && (
+              <div>
+                <h2 className="text-xl font-semibold mb-3">
+                  Live Location Sharing
+                </h2>
+                <p className="text-sm text-[#5C4330] mb-3">
+                  Generate a shareable link and let others track your route in
+                  real time.
                 </p>
-                <button onClick={stopSharing} className="bg-red-600 text-white px-4 py-2 rounded">
-                  Stop Sharing
-                </button>
+
+                {!shareLink ? (
+                  <button
+                    onClick={startSharing}
+                    className="bg-[#8B5E3C] text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-[#6C452A] transition"
+                  >
+                    Start Sharing Live Location
+                  </button>
+                ) : (
+                  <div className="space-y-4">
+                    <p className="text-sm">
+                      Share this link:{" "}
+                      <a
+                        href={shareLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#8B5E3C] underline break-all"
+                      >
+                        {shareLink}
+                      </a>
+                    </p>
+                    <button
+                      onClick={stopSharing}
+                      className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-700 transition"
+                    >
+                      Stop Sharing
+                    </button>
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
+          </section>
+        </div>
       </main>
     </div>
   );

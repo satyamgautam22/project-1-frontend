@@ -144,8 +144,8 @@ const Uploadingproject = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h2 className="text-4xl font-bold text-center text-blue-700 mb-10">
-        Project Dashboard
+      <h2 className="text-4xl font-bold text-center text-[#2E1B0F] mb-10">
+        {editingId ? "Edit Project" : "Add New Project"}
       </h2>
 
       {/* Form */}
@@ -159,7 +159,7 @@ const Uploadingproject = () => {
             name="title"
             value={form.title}
             onChange={handleChange}
-            placeholder="Project Title"
+            placeholder="Post Title"
             required
           />
         </div>
@@ -170,7 +170,7 @@ const Uploadingproject = () => {
           name="description"
           value={form.description}
           onChange={handleChange}
-          placeholder="Project Description"
+          placeholder="Post Description"
           required
         />
 
@@ -189,6 +189,7 @@ const Uploadingproject = () => {
               className="h-28 w-28 object-cover rounded-lg border shadow"
             />
           )}
+          
           {uploadingImage && (
             <p className="text-sm text-gray-500">Uploading image…</p>
           )}

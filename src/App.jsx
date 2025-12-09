@@ -16,13 +16,14 @@ import Guidelogin from "./pages/Guidelogin.jsx";
 import GuideBooking from "./pages/GuideBooking.jsx";
 import Success from "./pages/Payementpass.jsx";
 import Cancel from "./pages/Fail.jsx";
+import Toaster from "react-hot-toast";
 
 
 
 const App = () => {
   return (
     <>
-      
+     
     
    
       <Router>

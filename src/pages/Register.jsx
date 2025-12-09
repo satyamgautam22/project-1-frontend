@@ -17,7 +17,7 @@ const RegisterPage = () => {
       const res = await axios.post(
         "https://project1-backend-vn8m.onrender.com/api/auth/register",
         { name, email, password },
-        { withCredentials: true } // important if using cookies
+        { withCredentials: true }
       );
 
       if (res.status === 201 || res.status === 200) {
@@ -32,57 +32,73 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-gray-900 to-black px-4">
-      <div className="w-full max-w-lg bg-white/5 backdrop-blur-md rounded-2xl shadow-2xl p-8">
-        <h2 className="text-2xl font-bold text-white mb-6">Register</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#F5F2EB] px-4">
+      <div className="w-full max-w-lg bg-[#FDF7EC] border border-[#E2D7C5] rounded-2xl shadow-xl p-8">
+
+        <h2 className="text-3xl font-semibold text-[#3A2417] mb-4 text-center">
+          Create Your Account
+        </h2>
+        <p className="text-sm text-[#5C4330] text-center mb-6">
+          Join the heritage community and start exploring.
+        </p>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+
+          {/* Full Name */}
           <div>
-            <label className="text-sm text-gray-300">Full Name</label>
+            <label className="text-sm text-[#5C4330]">Full Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
               required
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:outline-none focus:ring-2 focus:ring-[#C58F48]"
             />
           </div>
+
+          {/* Email */}
           <div>
-            <label className="text-sm text-gray-300">Email</label>
+            <label className="text-sm text-[#5C4330]">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:outline-none focus:ring-2 focus:ring-[#C58F48]"
             />
           </div>
+
+          {/* Password */}
           <div>
-            <label className="text-sm text-gray-300">Password</label>
+            <label className="text-sm text-[#5C4330]">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               required
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:outline-none focus:ring-2 focus:ring-[#C58F48]"
             />
           </div>
 
-          {error && <p className="text-red-400 text-sm">{error}</p>}
-          {success && <p className="text-green-400 text-sm">{success}</p>}
+          {/* Errors */}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
+          {success && <p className="text-green-600 text-sm">{success}</p>}
 
+          {/* Register Button */}
           <button
             type="submit"
-            className="mt-4 w-full py-3 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold transition"
+            className="mt-2 w-full py-3 rounded-full bg-[#8B5E3C] text-white font-semibold hover:bg-[#6C452A] transition"
           >
             Register
           </button>
         </form>
-        <p className="mt-6 text-sm text-gray-400">
+
+        <p className="mt-6 text-sm text-[#5C4330] text-center">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-400 hover:underline">
+          <a href="/login" className="text-[#8B5E3C] hover:underline font-medium">
             Login
           </a>
         </p>

@@ -25,10 +25,13 @@ const GuideRegistration = () => {
     if (!location.trim()) return "Location is required.";
     if (!gender) return "Please select your gender.";
     const ageNum = Number(age);
-    if (!age || Number.isNaN(ageNum) || ageNum < 10 || ageNum > 120) return "Enter a valid age (10-120).";
-    if (!languages.trim()) return "Languages field is required (e.g. Hindi, English).";
+    if (!age || Number.isNaN(ageNum) || ageNum < 10 || ageNum > 120)
+      return "Enter a valid age (10-120).";
+    if (!languages.trim())
+      return "Languages field is required (e.g. Hindi, English).";
     const expNum = Number(experience);
-    if (experience === "" || Number.isNaN(expNum) || expNum < 0) return "Enter a valid experience (>= 0).";
+    if (experience === "" || Number.isNaN(expNum) || expNum < 0)
+      return "Enter a valid experience (>= 0).";
     return "";
   };
 
@@ -49,7 +52,7 @@ const GuideRegistration = () => {
         location: location.trim(),
         gender,
         age: Number(age),
-        languages: languages.trim(), // backend can split if needed
+        languages: languages.trim(),
         experience: Number(experience),
       };
 
@@ -73,16 +76,27 @@ const GuideRegistration = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-gray-900 to-black px-4">
-      <div className="w-full max-w-lg bg-white/5 backdrop-blur-md rounded-2xl shadow-2xl p-8">
-        <h2 className="text-2xl font-bold text-white mb-6">Guide Registration</h2>
+    <div className="min-h-screen flex items-center justify-center bg-[#F5F2EB] px-4">
+      <div className="w-full max-w-3xl bg-[#FDF7EC] border border-[#E2D7C5] rounded-2xl shadow-xl p-8 md:p-10">
+        <h2 className="text-3xl font-semibold text-[#3A2417] mb-2 text-center">
+          Guide Registration
+        </h2>
+        <p className="text-sm text-[#5C4330] text-center mb-6">
+          Become a verified local guide and help travelers explore India&apos;s
+          heritage.
+        </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
+        <form
+          onSubmit={handleSubmit}
+          className="grid md:grid-cols-2 gap-5"
+          noValidate
+        >
+          {/* Full Name */}
           <div>
-            <label className="text-sm text-gray-300">Full Name</label>
+            <label className="text-sm text-[#5C4330]">Full Name</label>
             <input
               type="text"
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:ring-2 focus:ring-[#C58F48] focus:outline-none"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your full name"
@@ -90,11 +104,12 @@ const GuideRegistration = () => {
             />
           </div>
 
+          {/* Email */}
           <div>
-            <label className="text-sm text-gray-300">Email</label>
+            <label className="text-sm text-[#5C4330]">Email</label>
             <input
               type="email"
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:ring-2 focus:ring-[#C58F48] focus:outline-none"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
@@ -102,11 +117,12 @@ const GuideRegistration = () => {
             />
           </div>
 
+          {/* Password */}
           <div>
-            <label className="text-sm text-gray-300">Password</label>
+            <label className="text-sm text-[#5C4330]">Password</label>
             <input
               type="password"
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:ring-2 focus:ring-[#C58F48] focus:outline-none"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Min 8 characters"
@@ -114,11 +130,12 @@ const GuideRegistration = () => {
             />
           </div>
 
+          {/* Location */}
           <div>
-            <label className="text-sm text-gray-300">Location</label>
+            <label className="text-sm text-[#5C4330]">Location</label>
             <input
               type="text"
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:ring-2 focus:ring-[#C58F48] focus:outline-none"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="City / State"
@@ -126,28 +143,38 @@ const GuideRegistration = () => {
             />
           </div>
 
+          {/* Gender */}
           <div>
-            <label className="text-sm text-gray-300">Gender</label>
+            <label className="text-sm text-[#5C4330]">Gender</label>
             <select
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] focus:ring-2 focus:ring-[#C58F48] focus:outline-none"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
               required
             >
-              <option value="" disabled>Select gender</option>
-              <option value="Male" className="text-black">Male</option>
-              <option value="Female" className="text-black">Female</option>
-              <option value="Other" className="text-black">Other</option>
+              <option value="" disabled>
+                Select gender
+              </option>
+              <option value="Male" className="text-black">
+                Male
+              </option>
+              <option value="Female" className="text-black">
+                Female
+              </option>
+              <option value="Other" className="text-black">
+                Other
+              </option>
             </select>
           </div>
 
+          {/* Age */}
           <div>
-            <label className="text-sm text-gray-300">Age</label>
+            <label className="text-sm text-[#5C4330]">Age</label>
             <input
               type="number"
               min="10"
               max="120"
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:ring-2 focus:ring-[#C58F48] focus:outline-none"
               value={age}
               onChange={(e) => setAge(e.target.value)}
               placeholder="Enter your age"
@@ -156,11 +183,11 @@ const GuideRegistration = () => {
           </div>
 
           {/* Languages */}
-          <div>
-            <label className="text-sm text-gray-300">Languages Known</label>
+          <div className="md:col-span-2">
+            <label className="text-sm text-[#5C4330]">Languages Known</label>
             <input
               type="text"
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:ring-2 focus:ring-[#C58F48] focus:outline-none"
               value={languages}
               onChange={(e) => setLanguages(e.target.value)}
               placeholder="e.g. Hindi, English, Bengali (comma separated)"
@@ -169,12 +196,12 @@ const GuideRegistration = () => {
           </div>
 
           {/* Experience */}
-          <div>
-            <label className="text-sm text-gray-300">Experience (years)</label>
+          <div className="md:col-span-2 md:max-w-xs">
+            <label className="text-sm text-[#5C4330]">Experience (years)</label>
             <input
               type="number"
               min="0"
-              className="mt-1 w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:ring-2 focus:ring-[#C58F48] focus:outline-none"
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
               placeholder="Enter years of experience"
@@ -182,21 +209,27 @@ const GuideRegistration = () => {
             />
           </div>
 
-          {error && <p className="text-red-400 text-sm">{error}</p>}
-          {success && <p className="text-green-400 text-sm">{success}</p>}
+          {/* Messages */}
+          <div className="md:col-span-2 space-y-1">
+            {error && <p className="text-red-600 text-sm">{error}</p>}
+            {success && <p className="text-green-600 text-sm">{success}</p>}
+          </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="mt-4 w-full py-3 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold transition"
-          >
-            {loading ? "Processing..." : "Register"}
-          </button>
+          {/* Submit Button */}
+          <div className="md:col-span-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="mt-2 w-full py-3 rounded-full bg-[#8B5E3C] text-white font-semibold hover:bg-[#6C452A] transition disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {loading ? "Processing..." : "Register"}
+            </button>
+          </div>
         </form>
 
-        <p className="mt-6 text-sm text-gray-400">
+        <p className="mt-6 text-sm text-[#5C4330] text-center">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-400 hover:underline">
+          <a href="/login" className="text-[#8B5E3C] hover:underline font-medium">
             Login
           </a>
         </p>
