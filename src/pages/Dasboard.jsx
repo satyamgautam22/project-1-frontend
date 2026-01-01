@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
+// Import sections
 import ProjectsSection from "../pages/Project.jsx";
 import AddImageSection from "../component/Image.jsx";
 import AddVideoSection from "../component/Video.jsx";
@@ -9,11 +11,14 @@ import Uploadingproject from "../component/Uploadingproject.jsx";
 import Soket from "../Soket.jsx";
 import InstantMessages from "./InstantMessages.jsx";
 import GuideBooking from "./GuideBooking.jsx";
-import toast from "react-hot-toast";
+import DashboardHome from "./DashboardHome.jsx";
+import Chat from "./Chat.jsx";
+import { div } from "framer-motion/client";
+
 
 const Dashboard = () => {
   // pick a valid default tab:
-  const [activeSection, setActiveSection] = useState("file");
+  const [activeSection, setActiveSection] = useState("home");
   const [loggedOut, setLoggedOut] = useState(false);
   const [shareLink, setShareLink] = useState("");
 
@@ -27,6 +32,8 @@ const Dashboard = () => {
     
   }
 
+
+
   const logout = () => {
     // clear auth on logout
     localStorage.removeItem("token");
@@ -34,6 +41,7 @@ const Dashboard = () => {
     setLoggedOut(true);
     
   };
+  
 
   const menuItems = [
    
@@ -41,6 +49,8 @@ const Dashboard = () => {
 
    
     { key: "bookguide", label: "🧑‍✈️ Guide Booking" },
+    { key: "Messager", label: "💬 Messenger" },
+
   ];
 
   // Live Location Sharing
@@ -87,6 +97,7 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="flex-1 p-6 bg-[#FDF7EC] overflow-auto">
         <div className="max-w-6xl mx-auto space-y-4">
+          
           {/* Header */}
           
 
@@ -98,6 +109,10 @@ const Dashboard = () => {
             {activeSection === "file" && <FileUploadSection />}
             {activeSection === "projects" && <ProjectsSection />}
             {activeSection === "instantMessager" && <InstantMessages />}
+            {activeSection === "home" && <DashboardHome />}
+            {activeSection === "chat" &&
+              
+            <Chat />}
             {activeSection === "bookguide" && <GuideBooking />}
 
             {activeSection === "liveLocation" && (

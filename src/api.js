@@ -10,4 +10,10 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// ✅ ADD THIS NAMED EXPORT
+export const getChatMessages = async (chatId) => {
+  const res = await api.get(`/api/chat/${chatId}/messages`);
+  return res.data;
+};
+
 export default api;

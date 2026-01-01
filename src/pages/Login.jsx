@@ -31,7 +31,7 @@ const LoginPage = () => {
       navigate("/dashboard");
     } catch (err) {
       // ERROR TOAST
-      toast.error(err?.response?.data?.message || "Login failed! Try again.");
+      toast.error( "Login failed! Try again.");
     } finally {
       setLoading(false);
     }
@@ -46,14 +46,18 @@ const LoginPage = () => {
             Login
           </h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} autoComplete="on" className="flex flex-col gap-5">
 
             {/* Email */}
             <div>
               <label className="text-sm text-[#5C4330]">Email</label>
               <input
-                type="email"
+                
                 value={email}
+                type="email"
+                name="email"
+                autoComplete="username"
+                
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="mt-1 w-full p-3 rounded-lg bg-[#F5F2EB] border border-[#D8C8AF] text-[#3A2417] placeholder-[#A0896F] focus:outline-none focus:ring-2 focus:ring-[#C58F48]"
@@ -65,7 +69,11 @@ const LoginPage = () => {
             <div>
               <label className="text-sm text-[#5C4330]">Password</label>
               <input
-                type="password"
+               
+               
+               type="password"
+                 name="password"
+               autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"

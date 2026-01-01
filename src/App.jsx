@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 import Home from "./pages/Home.jsx";
 import Services from "./pages/Services.jsx";
@@ -16,7 +17,8 @@ import Guidelogin from "./pages/Guidelogin.jsx";
 import GuideBooking from "./pages/GuideBooking.jsx";
 import Success from "./pages/Payementpass.jsx";
 import Cancel from "./pages/Fail.jsx";
-import Toaster from "react-hot-toast";
+import Chat from "./pages/Chat.jsx";
+
 
 
 
@@ -24,7 +26,30 @@ const App = () => {
   return (
     <>
      
-    
+     <Toaster 
+     position="top-right"
+  reverseOrder={false}
+  gutter={8}
+  containerClassName=""
+  containerStyle={{}}
+  toasterId="default"
+  toastOptions={{
+    // Define default options
+    className: '',
+    duration: 5000,
+    style: {
+      background: '#363636',
+      color: '#fff',
+    },
+    success: {
+      duration: 3000,
+      theme: {
+        primary: 'green',
+        secondary: 'black',
+      },
+    },
+  }}
+/>
    
       <Router>
         {/* Routes */}
@@ -41,6 +66,7 @@ const App = () => {
           <Route path="/bookguide" element={<GuideBooking />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
+          <Route path="/chatsection" element={<Chat />} />
       
 
         </Routes>
