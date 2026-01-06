@@ -3,12 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 
 import Home from "./pages/Home.jsx";
-import Services from "./pages/Services.jsx";
-import About from "./component/About.jsx"
 import Projects from "./pages/Project.jsx";
 import Dashboard from "./pages/Dasboard.jsx";
-
-import LiveLocationViewer from "./component/Viewer.jsx"
 import ProjectDetails from "./pages/Project.jsx"
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -17,7 +13,7 @@ import Guidelogin from "./pages/Guidelogin.jsx";
 import GuideBooking from "./pages/GuideBooking.jsx";
 import Success from "./pages/Payementpass.jsx";
 import Cancel from "./pages/Fail.jsx";
-import Chat from "./pages/Chat.jsx";
+import InstantMessages from "./pages/InstantMessages.jsx";
 
 
 
@@ -59,14 +55,13 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/live/:shareId" element={<LiveLocationViewer />} />
           <Route path="/project/:id" element={<ProjectDetails />} />
           <Route path="/guide" element={<GuideRegisteration />} />
           <Route path="/logingguide" element={<Guidelogin />} />
           <Route path="/bookguide" element={<GuideBooking />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
-          <Route path="/chatsection" element={<Chat />} />
+          <Route path="/chatsection" element={<InstantMessages />} />
       
 
         </Routes>

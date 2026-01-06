@@ -8,19 +8,17 @@ import AddImageSection from "../component/Image.jsx";
 import AddVideoSection from "../component/Video.jsx";
 import FileUploadSection from "../component/File.jsx";
 import Uploadingproject from "../component/Uploadingproject.jsx";
-import Soket from "../Soket.jsx";
 import InstantMessages from "./InstantMessages.jsx";
 import GuideBooking from "./GuideBooking.jsx";
 import DashboardHome from "./DashboardHome.jsx";
-import Chat from "./Chat.jsx";
-import { div } from "framer-motion/client";
+
+
 
 
 const Dashboard = () => {
   // pick a valid default tab:
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("Messenger");
   const [loggedOut, setLoggedOut] = useState(false);
-  const [shareLink, setShareLink] = useState("");
 
   // 🔒 block entry if no token
   const token =
@@ -46,10 +44,9 @@ const Dashboard = () => {
   const menuItems = [
    
     { key: "uploadProject", label: "📂 Post" },
-
-   
     { key: "bookguide", label: "🧑‍✈️ Guide Booking" },
-    { key: "Messager", label: "💬 Messenger" },
+    { key: "instantMessager", label: "💬 Messenger" }
+
 
   ];
 
@@ -110,51 +107,10 @@ const Dashboard = () => {
             {activeSection === "projects" && <ProjectsSection />}
             {activeSection === "instantMessager" && <InstantMessages />}
             {activeSection === "home" && <DashboardHome />}
-            {activeSection === "chat" &&
-              
-            <Chat />}
             {activeSection === "bookguide" && <GuideBooking />}
 
-            {activeSection === "liveLocation" && (
-              <div>
-                <h2 className="text-xl font-semibold mb-3">
-                  Live Location Sharing
-                </h2>
-                <p className="text-sm text-[#5C4330] mb-3">
-                  Generate a shareable link and let others track your route in
-                  real time.
-                </p>
-
-                {!shareLink ? (
-                  <button
-                    onClick={startSharing}
-                    className="bg-[#8B5E3C] text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-[#6C452A] transition"
-                  >
-                    Start Sharing Live Location
-                  </button>
-                ) : (
-                  <div className="space-y-4">
-                    <p className="text-sm">
-                      Share this link:{" "}
-                      <a
-                        href={shareLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#8B5E3C] underline break-all"
-                      >
-                        {shareLink}
-                      </a>
-                    </p>
-                    <button
-                      onClick={stopSharing}
-                      className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-700 transition"
-                    >
-                      Stop Sharing
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
+           
+            
           </section>
         </div>
       </main>
